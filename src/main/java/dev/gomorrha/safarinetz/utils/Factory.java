@@ -58,8 +58,7 @@ public class Factory {
                 meta.getPersistentDataContainer().remove(Safarinetz.getMobDataKey());
                 item.setItemMeta(meta);
             }
-        } catch (Exception e) {
-            player.sendMessage("§cFehler beim Freilassen: " + e.getMessage());
+        } catch (Exception ignored) {
         }
     }
 

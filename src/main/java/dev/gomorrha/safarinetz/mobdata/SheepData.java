@@ -20,7 +20,7 @@ public class SheepData extends MobData{
             this.sheared = sheep.isSheared();
             this.age = sheep.getAge();
         } else{
-            throw new IllegalArgumentException("Kein Pferd");
+            throw new IllegalArgumentException("Kein Schaf");
         }
 
     }
