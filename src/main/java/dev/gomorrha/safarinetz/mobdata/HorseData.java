@@ -1,5 +1,6 @@
 package dev.gomorrha.safarinetz.mobdata;
 
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.LivingEntity;
@@ -9,6 +10,7 @@ public class HorseData extends MobData{
     private final Horse.Color color;
     private final Horse.Style style;
     private final double jumpStrength;
+    private final double speed;
     private final int age;
     private final boolean tamed;
 
@@ -19,6 +21,7 @@ public class HorseData extends MobData{
             this.color = horse.getColor();
             this.style = horse.getStyle();
             this.jumpStrength = horse.getJumpStrength();
+            this.speed = horse.getAttribute(Attribute.MOVEMENT_SPEED).getBaseValue();
             this.age = horse.getAge();
             this.tamed = horse.isTamed();
         } else {
@@ -34,6 +37,7 @@ public class HorseData extends MobData{
             horse.setColor(color);
             horse.setStyle(style);
             horse.setJumpStrength(jumpStrength);
+            entity.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(speed);
             horse.setAge(age);
             horse.setTamed(tamed);
         }
