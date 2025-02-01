@@ -1,0 +1,7 @@
+name: Safarinetz
+version: '1.0-SNAPSHOT'
+main: dev.gomorrha.safarinetz.Safarinetz
+api-version: '1.21'
+prefix: SAFARI
+authors: [ gmrrh ]
+description: Fange Tiere und lasse diese später wieder frei
