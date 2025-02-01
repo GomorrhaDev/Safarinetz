@@ -10,11 +10,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Safarinetz extends JavaPlugin {
     private static Gson gson;
     private static NamespacedKey mobDataKey;
+    private static NamespacedKey netzIdentifier;
     private static Safarinetz plugin;
 
     @Override
     public void onEnable() {
         mobDataKey = new NamespacedKey(this, "mob_data");
+        netzIdentifier = new NamespacedKey(this, "isNetz");
         gson = new Gson();
         plugin = this;
 
@@ -37,6 +39,10 @@ public final class Safarinetz extends JavaPlugin {
 
     public static NamespacedKey getMobDataKey(){
         return mobDataKey;
+    }
+
+    public static NamespacedKey getNetzIdentifier(){
+        return netzIdentifier;
     }
 
     public static Safarinetz getPlugin(){

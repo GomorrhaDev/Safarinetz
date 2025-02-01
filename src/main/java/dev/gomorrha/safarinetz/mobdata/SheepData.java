@@ -3,7 +3,6 @@ package dev.gomorrha.safarinetz.mobdata;
 import org.bukkit.DyeColor;
 
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Horse;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Sheep;
 import org.bukkit.persistence.PersistentDataContainer;

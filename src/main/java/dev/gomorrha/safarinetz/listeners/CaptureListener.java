@@ -5,14 +5,14 @@ import dev.gomorrha.safarinetz.mobdata.MobData;
 import dev.gomorrha.safarinetz.Safarinetz;
 import dev.gomorrha.safarinetz.mobdata.SheepData;
 import dev.gomorrha.safarinetz.utils.Factory;
+import dev.gomorrha.safarinetz.utils.Utils;
+import net.kyori.adventure.text.Component;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
 public class CaptureListener implements Listener {
 
@@ -59,7 +59,7 @@ public class CaptureListener implements Listener {
                     entity.getPersistentDataContainer(),
                     entity
             );
-        }else {
+        } else {
             mobData = new MobData(
                     entity.getType(),
                     entity.getCustomName(),
@@ -71,10 +71,7 @@ public class CaptureListener implements Listener {
 
         String serializedData = Safarinetz.getGson().toJson(mobData);
 
-        ItemMeta meta = netz.getItemMeta();
-        meta.getPersistentDataContainer().set(Safarinetz.getMobDataKey(), PersistentDataType.STRING, serializedData);
-        meta.setDisplayName("§6Safarinetz §7(" + entity.getType().toString() + ")");
-        netz.setItemMeta(meta);
+        ItemStack newNetzItem = Factory.createSafarinetzItem(entity, serializedData);
 
         entity.remove();
 
@@ -84,6 +81,7 @@ public class CaptureListener implements Listener {
             p.getInventory().setItemInMainHand(null);
         }
 
-        p.getInventory().addItem(netz);
+        p.getInventory().addItem(newNetzItem);
     }
+
 }

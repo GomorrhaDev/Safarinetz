@@ -24,6 +24,7 @@ public class HorseData extends MobData{
             this.speed = horse.getAttribute(Attribute.MOVEMENT_SPEED).getBaseValue();
             this.age = horse.getAge();
             this.tamed = horse.isTamed();
+
         } else {
             throw new IllegalArgumentException("Kein Pferd");
         }
