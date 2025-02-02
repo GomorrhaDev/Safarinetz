@@ -28,18 +28,6 @@ import java.util.List;
 
 public class Factory {
 
-    public static ItemStack createCatcherItem() {
-        ItemStack catcher = new ItemStack(Material.LEAD);
-        ItemMeta meta = catcher.getItemMeta();
-        meta.setDisplayName("§6Safarinetz");
-        meta.setLore(java.util.Arrays.asList(
-                "§7Shift + Schlagen um ein Mob zu fangen",
-                "§7Rechtsklick um es freizulassen"
-        ));
-        catcher.setItemMeta(meta);
-        return catcher;
-    }
-
     public static void releaseMob(Player player, String mobData, Location spawnLoc) {
         try {
             JsonObject json = JsonParser.parseString(mobData).getAsJsonObject();
