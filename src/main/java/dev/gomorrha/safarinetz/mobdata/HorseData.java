@@ -1,9 +1,11 @@
 package dev.gomorrha.safarinetz.mobdata;
 
+import dev.gomorrha.safarinetz.utils.Utils;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 
 public class HorseData extends MobData{
@@ -13,6 +15,7 @@ public class HorseData extends MobData{
     private final double speed;
     private final int age;
     private final boolean tamed;
+    private final String[] inv;
 
     public HorseData(EntityType entityType, String customName, double health, PersistentDataContainer nbtData, LivingEntity entity) {
         super(entityType, customName, health, nbtData, entity);
@@ -24,6 +27,11 @@ public class HorseData extends MobData{
             this.speed = horse.getAttribute(Attribute.MOVEMENT_SPEED).getBaseValue();
             this.age = horse.getAge();
             this.tamed = horse.isTamed();
+            this.inv = new String[horse.getInventory().getSize()];
+            for (int i = 0; i < horse.getInventory().getSize(); i++) {
+                this.inv[i] = Utils.itemStackToString(horse.getInventory().getItem(i));
+            }
+
 
         } else {
             throw new IllegalArgumentException("Kein Pferd");
@@ -41,6 +49,11 @@ public class HorseData extends MobData{
             entity.getAttribute(Attribute.MOVEMENT_SPEED).setBaseValue(speed);
             horse.setAge(age);
             horse.setTamed(tamed);
+            ItemStack[] newInv = new ItemStack[inv.length];
+            for (int i = 0; i < inv.length; i++) {
+                newInv[i] = Utils.stringToItemStack(inv[i]);
+            }
+            horse.getInventory().setContents(newInv);
         }
     }
 

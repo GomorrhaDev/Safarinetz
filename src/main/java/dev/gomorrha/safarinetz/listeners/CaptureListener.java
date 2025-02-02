@@ -1,9 +1,7 @@
 package dev.gomorrha.safarinetz.listeners;
 
-import dev.gomorrha.safarinetz.mobdata.HorseData;
-import dev.gomorrha.safarinetz.mobdata.MobData;
+import dev.gomorrha.safarinetz.mobdata.*;
 import dev.gomorrha.safarinetz.Safarinetz;
-import dev.gomorrha.safarinetz.mobdata.SheepData;
 import dev.gomorrha.safarinetz.utils.Factory;
 import dev.gomorrha.safarinetz.utils.Utils;
 import net.kyori.adventure.text.Component;
@@ -29,45 +27,87 @@ public class CaptureListener implements Listener {
         Entity target = ev.getEntity();
 
         if(!(target instanceof LivingEntity livingEntity)) return;
-        if (livingEntity instanceof Monster || livingEntity instanceof Player || livingEntity instanceof Villager) return;
+        if (livingEntity instanceof Monster || livingEntity instanceof Player || livingEntity instanceof Villager || livingEntity instanceof EnderDragon) return;
         if (livingEntity.getHealth() <= 0) return;
         if(!Factory.isSafarinetzItem(netzItem)) return;
 
-
         catchMob(p, livingEntity, netzItem);
-
 
     }
 
     private void catchMob(Player p, LivingEntity entity, ItemStack netz) {
         double healthPercent = 100 / entity.getAttribute(Attribute.MAX_HEALTH).getValue() * entity.getHealth();
 
+        p.sendMessage(entity.getType().toString());
+
         MobData mobData;
-        if(entity instanceof Horse || entity instanceof ChestedHorse){
-            mobData = new HorseData(
-                    entity.getType(),
-                    entity.getCustomName(),
-                    healthPercent,
-                    entity.getPersistentDataContainer(),
-                    entity
-            );
-        } else if(entity instanceof Sheep){
-            mobData = new SheepData(
-                    entity.getType(),
-                    entity.getCustomName(),
-                    healthPercent,
-                    entity.getPersistentDataContainer(),
-                    entity
-            );
-        } else {
-            mobData = new MobData(
-                    entity.getType(),
-                    entity.getCustomName(),
-                    healthPercent,
-                    entity.getPersistentDataContainer(),
-                    entity
-            );
+        switch (entity.getType().toString()) {
+            case "DONKEY":
+            case "CHESTED_HORSE":
+                mobData = new DonkeyData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "MULE":
+                mobData = new MuleData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "TURTLE":
+                mobData = new TurtleData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "FOX":
+                mobData = new FoxData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "HORSE":
+                mobData = new HorseData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "SHEEP":
+                mobData = new SheepData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            default:
+                mobData = new MobData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
         }
+
 
         String serializedData = Safarinetz.getGson().toJson(mobData);
 

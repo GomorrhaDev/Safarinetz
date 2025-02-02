@@ -13,9 +13,6 @@ import java.lang.reflect.Field;
 
 public class SafarinetzCommand extends Command {
 
-    //Das war jetzt eine Stunde Zeit Verschwendung, warum ist das so viel komplizierter als mit Spigot
-    //Wehe hier kommt jetzt wer mit "ABER DU MUSST KEINE PLUGIN.YML MACHEN"
-
     public SafarinetzCommand() {
         super("safarinetz");
         this.setDescription("Gibt einem Spieler ein leeres Safarinetz");

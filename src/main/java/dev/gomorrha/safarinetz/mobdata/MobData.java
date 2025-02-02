@@ -4,6 +4,7 @@ package dev.gomorrha.safarinetz.mobdata;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import java.io.Serializable;

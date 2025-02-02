@@ -1,7 +1,11 @@
 package dev.gomorrha.safarinetz.utils;
 
 import dev.gomorrha.safarinetz.enums.Artikel;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 
@@ -74,6 +78,15 @@ public class Utils {
             case "FROG":
                 artikel.putIfAbsent(name, Artikel.GEFANGENER);
                 return "Frosch";
+            case "SALMON":
+                artikel.putIfAbsent(name, Artikel.GEFANGENER);
+                return "Lachs";
+            case "COD":
+                artikel.putIfAbsent(name, Artikel.GEFANGENER);
+                return "Kabeljau";
+            case "PUFFERFISH":
+                artikel.putIfAbsent(name, Artikel.GEFANGENER);
+                return "Kugelfisch";
             default:
                 return name;
 
@@ -107,7 +120,53 @@ public class Utils {
         return artikelText + " " + tierName;
     }
 
-    public static HashMap<String, Artikel> getArtikel() {
-        return artikel;
+    public static String itemStackToString(ItemStack item) {
+        if (item == null || item.getType() == Material.AIR) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(item.getType());
+
+        sb.append(":").append(item.getDurability());
+
+        if (!item.getEnchantments().isEmpty()) {
+            sb.append(":");
+            item.getEnchantments().forEach((enchantment, level) -> {
+                sb.append(enchantment.getKey().getKey()).append("=").append(level).append(";");
+            });
+        }
+
+        return sb.toString();
     }
+
+    public static ItemStack stringToItemStack(String str) {
+        if (str == null || str.isEmpty()) {
+            return null;
+        }
+
+        String[] parts = str.split(":");
+        Material material = Material.getMaterial(parts[0]);
+        if (material == null) {
+            return null;
+        }
+
+        short durability = Short.parseShort(parts[1]);
+        ItemStack itemStack = new ItemStack(material, 1);
+        itemStack.setDurability(durability);
+
+        if (parts.length > 2) {
+            String[] enchantments = parts[2].split(";");
+            for (String enchantment : enchantments) {
+                String[] enchantmentParts = enchantment.split("=");
+                Enchantment ench = Enchantment.getByKey(NamespacedKey.minecraft(enchantmentParts[0]));
+                if (ench != null) {
+                    itemStack.addEnchantment(ench, Integer.parseInt(enchantmentParts[1]));
+                }
+            }
+        }
+
+        return itemStack;
+    }
+
 }
