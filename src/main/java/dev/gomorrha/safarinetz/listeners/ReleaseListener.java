@@ -97,11 +97,8 @@ public class ReleaseListener implements Listener {
                     break;
                 case "DONKEY":
                 case "CHESTED_HORSE":
-                    data = Safarinetz.getGson().fromJson(mobData, DonkeyData.class);
-                    break;
                 case "MULE":
-                case "ZOMBIE_HORSE":
-                    data = Safarinetz.getGson().fromJson(mobData, MuleData.class);
+                    data = Safarinetz.getGson().fromJson(mobData, DonkeyData.class);
                     break;
                 case "FOX":
                     data = Safarinetz.getGson().fromJson(mobData, FoxData.class);

@@ -1,5 +1,6 @@
 package dev.gomorrha.safarinetz.mobdata;
 
+import dev.gomorrha.safarinetz.utils.Utils;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fox;

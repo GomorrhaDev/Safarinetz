@@ -25,6 +25,7 @@ public class CaptureListener implements Listener {
         Entity target = ev.getEntity();
 
         if(!(target instanceof Animals animal)) return;
+        if(animal instanceof SkeletonHorse || animal instanceof ZombieHorse) return;
         if (animal.getHealth() <= 0) return;
         if(!Factory.isSafarinetzItem(netzItem)) return;
 
@@ -157,17 +158,8 @@ public class CaptureListener implements Listener {
                 break;
             case "DONKEY":
             case "CHESTED_HORSE":
-                mobData = new DonkeyData(
-                        entity.getType(),
-                        entity.getCustomName(),
-                        healthPercent,
-                        entity.getPersistentDataContainer(),
-                        entity
-                );
-                break;
             case "MULE":
-            case "ZOMBIE_HORSE":
-                mobData = new MuleData(
+                mobData = new DonkeyData(
                         entity.getType(),
                         entity.getCustomName(),
                         healthPercent,
