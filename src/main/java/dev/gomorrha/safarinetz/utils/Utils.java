@@ -20,20 +20,24 @@ public class Utils {
         String name = et.name();
 
         switch (name) {
+            case "ARMADILLO":
+                artikel.putIfAbsent(name, Artikel.GEFANGENES);
+                return "Armadillo";
             case "HORSE":
                 artikel.putIfAbsent(name, Artikel.GEFANGENES);
                 return "Pferd";
             case "DONKEY":
-                artikel.putIfAbsent(name, Artikel.GEFANGENES);
+                artikel.putIfAbsent(name, Artikel.GEFANGENER);
                 return "Esel";
             case "MULE":
                 artikel.putIfAbsent(name, Artikel.GEFANGENES);
                 return "Maultier";
             case "COW":
-                artikel.putIfAbsent(name, Artikel.GEFANGENES);
+                artikel.putIfAbsent(name, Artikel.GEFANGENE);
                 return "Kuh";
             case "MOOSHROOM":
-                artikel.putIfAbsent(name, Artikel.GEFANGENES);
+            case "MUSHROOM_COW":
+                artikel.putIfAbsent(name, Artikel.GEFANGENE);
                 return "Mooshroom";
             case "SHEEP":
                 artikel.putIfAbsent(name, Artikel.GEFANGENES);
@@ -70,10 +74,10 @@ public class Utils {
                 artikel.putIfAbsent(name, Artikel.GEFANGENER);
                 return "Wolf";
             case "GOAT":
-                artikel.putIfAbsent(name, Artikel.GEFANGENES);
+                artikel.putIfAbsent(name, Artikel.GEFANGENE);
                 return "Ziege";
             case "AXOLOTL":
-                artikel.putIfAbsent(name, Artikel.GEFANGENER);
+                artikel.putIfAbsent(name, Artikel.GEFANGENES);
                 return "Axolotl";
             case "FROG":
                 artikel.putIfAbsent(name, Artikel.GEFANGENER);
@@ -87,10 +91,15 @@ public class Utils {
             case "PUFFERFISH":
                 artikel.putIfAbsent(name, Artikel.GEFANGENER);
                 return "Kugelfisch";
+            case "BEE":
+                artikel.putIfAbsent(name, Artikel.GEFANGENE);
+                return "Biene";
+            case "PANDA":
+                artikel.putIfAbsent(name, Artikel.GEFANGENER);
+                return "Panda";
             default:
                 return name;
 
-                //Ich wette ich habe was vergessen
         }
     }
 

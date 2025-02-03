@@ -3,8 +3,6 @@ package dev.gomorrha.safarinetz.listeners;
 import dev.gomorrha.safarinetz.mobdata.*;
 import dev.gomorrha.safarinetz.Safarinetz;
 import dev.gomorrha.safarinetz.utils.Factory;
-import dev.gomorrha.safarinetz.utils.Utils;
-import net.kyori.adventure.text.Component;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -26,22 +24,137 @@ public class CaptureListener implements Listener {
 
         Entity target = ev.getEntity();
 
-        if(!(target instanceof LivingEntity livingEntity)) return;
-        if (livingEntity instanceof Monster || livingEntity instanceof Player || livingEntity instanceof Villager || livingEntity instanceof EnderDragon) return;
-        if (livingEntity.getHealth() <= 0) return;
+        if(!(target instanceof Animals animal)) return;
+        if (animal.getHealth() <= 0) return;
         if(!Factory.isSafarinetzItem(netzItem)) return;
 
-        catchMob(p, livingEntity, netzItem);
+        catchMob(p, animal, netzItem);
 
     }
 
-    private void catchMob(Player p, LivingEntity entity, ItemStack netz) {
+    private void catchMob(Player p, Animals entity, ItemStack netz) {
         double healthPercent = 100 / entity.getAttribute(Attribute.MAX_HEALTH).getValue() * entity.getHealth();
-
-        p.sendMessage(entity.getType().toString());
 
         MobData mobData;
         switch (entity.getType().toString()) {
+            case "WOLF":
+                mobData = new WolfData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "RABBIT":
+                mobData = new RabbitData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "PARROT":
+                mobData = new ParrotData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "PANDA":
+                mobData = new PandaData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "OCELOT":
+                mobData = new OcelotData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "MUSHROOM_COW":
+            case "MOOSHROOM":
+                mobData = new MushroomCowData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "CHICKEN":
+                mobData = new ChickenData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "LLAMA":
+                mobData = new LlamaData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "GOAT":
+                mobData = new GoatData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "FROG":
+                mobData = new FrogData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "CAT":
+                mobData = new CatData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "BEE":
+                mobData = new BeeData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
+            case "AXOLOTL":
+                mobData = new AxolotlData(
+                        entity.getType(),
+                        entity.getCustomName(),
+                        healthPercent,
+                        entity.getPersistentDataContainer(),
+                        entity
+                );
+                break;
             case "DONKEY":
             case "CHESTED_HORSE":
                 mobData = new DonkeyData(
@@ -53,16 +166,8 @@ public class CaptureListener implements Listener {
                 );
                 break;
             case "MULE":
+            case "ZOMBIE_HORSE":
                 mobData = new MuleData(
-                        entity.getType(),
-                        entity.getCustomName(),
-                        healthPercent,
-                        entity.getPersistentDataContainer(),
-                        entity
-                );
-                break;
-            case "TURTLE":
-                mobData = new TurtleData(
                         entity.getType(),
                         entity.getCustomName(),
                         healthPercent,
